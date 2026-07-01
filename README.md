@@ -51,9 +51,9 @@ Listings/   Keil 列表/map 输出目录
 | KEY2 | `PE2`，上拉 | 长按 3 秒清除 Wi-Fi 配置并重启 |
 | WKUP | `PA0`，下拉 | 开始周期上报 |
 
-ESP8266 串口参数为 `115200 8N1`，中断入口在 `USER/stm32f4xx_it.c` 的 `USART3_IRQHandler()`，实际接收处理在 `HARDWARE/wifi.c`。
+ESP8266 串口参数为 `115200 8N1`，中断入口在 `USER/stm32f4xx_it.c` 的 `USART3_IRQHandler()`，实际接收处理在 `HARDWARE/wifi.c`
 
-> 注意：当前云端 `switch` 控制只维护软件状态，`wifi_load_set()` 没有驱动具体继电器或负载 GPIO。如需控制风扇、继电器等外设，应在 `HARDWARE/wifi.c` 的 `wifi_load_set()` 中补充实际 GPIO 输出逻辑。
+> 注意：当前云端 `switch` 控制只维护软件状态，`wifi_load_set()` 没有驱动具体继电器或负载 GPIO。如需控制风扇、继电器等外设，可在 `HARDWARE/wifi.c` 的 `wifi_load_set()` 中补充其他功能
 
 ## 线程设计
 
@@ -86,9 +86,9 @@ MQTT 连接参数在 `HARDWARE/wifi.c` 中定义：
 
 | 参数 | 当前值 |
 | --- | --- |
-| ProductKey | `k0xzrztwuSU` |
-| DeviceName | `zheng` |
-| Host | `iot-060ab9rr.mqtt.iothub.aliyuncs.com` |
+| ProductKey | `yourkey` |
+| DeviceName | `yourdevicename` |
+| Host | `yourhost` |
 | Port | `1883` |
 | ClientId / Username / Password | 固化在 `wifi.c` 中 |
 
@@ -98,12 +98,12 @@ MQTT 连接参数在 `HARDWARE/wifi.c` 中定义：
 
 | 方向 | Topic | QoS | 说明 |
 | --- | --- | --- | --- |
-| 订阅 | `/k0xzrztwuSU/zheng/user/cmd` | 1 | 云端下发控制命令 |
-| 发布 | `/k0xzrztwuSU/zheng/user/DATA` | 0 | 温湿度和运行遥测 |
-| 发布 | `/k0xzrztwuSU/zheng/user/status` | 1 | 在线状态与运行状态 |
-| 发布 | `/k0xzrztwuSU/zheng/user/reply` | 1 | 命令执行回复 |
-| 发布 | `/k0xzrztwuSU/zheng/user/event` | 1 | 事件消息 |
-| 发布 | `/k0xzrztwuSU/zheng/user/heartbeat` | 0 | 心跳消息，默认 30 秒一次 |
+| 订阅 | `/cmd` | 1 | 云端下发控制命令 |
+| 发布 | `/DATA` | 0 | 温湿度和运行遥测 |
+| 发布 | `/status` | 1 | 在线状态与运行状态 |
+| 发布 | `/reply` | 1 | 命令执行回复 |
+| 发布 | `/event` | 1 | 事件消息 |
+| 发布 | `/heartbeat` | 0 | 心跳消息，默认 30 秒一次 |
 
 ## JSON 协议
 
