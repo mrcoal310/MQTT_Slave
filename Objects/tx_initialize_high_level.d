@@ -1,0 +1,15 @@
+.\objects\tx_initialize_high_level.o: THREADX\common\src\tx_initialize_high_level.c
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_api.h
+.\objects\tx_initialize_high_level.o: .\THREADX\ports\cortex_m4\ac5\inc\tx_port.h
+.\objects\tx_initialize_high_level.o: D:\Keilv5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\tx_initialize_high_level.o: D:\Keilv5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_trace.h
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_initialize.h
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_thread.h
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_timer.h
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_semaphore.h
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_queue.h
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_event_flags.h
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_mutex.h
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_block_pool.h
+.\objects\tx_initialize_high_level.o: .\THREADX\common\inc\tx_byte_pool.h

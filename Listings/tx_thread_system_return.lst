@@ -1,0 +1,143 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         #line   1                "THREADX\\ports\\cortex_m4\\ac5
+\\src\\tx_thread_system_return.s"
+    1 00000000         
+    2 00000000         
+    3 00000000         
+    4 00000000         
+    5 00000000         
+    6 00000000         
+    7 00000000         
+    8 00000000         
+    9 00000000         
+   10 00000000         
+   11 00000000         
+   12 00000000         
+   13 00000000         
+   14 00000000         
+   15 00000000         
+   16 00000000         
+   17 00000000         
+   18 00000000         
+   19 00000000         
+   20 00000000         
+   21 00000000         
+   22 00000000         
+   23 00000000         
+   24 00000000         
+   25 00000000         
+   26 00000000         
+   27 00000000                 AREA             ||.text||, CODE, READONLY
+   28 00000000         
+   29 00000000         
+   30 00000000         
+   31 00000000         
+   32 00000000         
+   33 00000000         
+   34 00000000         
+   35 00000000         
+   36 00000000         
+   37 00000000         
+   38 00000000         
+   39 00000000         
+   40 00000000         
+   41 00000000         
+   42 00000000         
+   43 00000000         
+   44 00000000         
+   45 00000000         
+   46 00000000         
+   47 00000000         
+   48 00000000         
+   49 00000000         
+   50 00000000         
+   51 00000000         
+   52 00000000         
+   53 00000000         
+   54 00000000         
+   55 00000000         
+   56 00000000         
+   57 00000000         
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   58 00000000         
+   59 00000000         
+   60 00000000         
+   61 00000000         
+   62 00000000         
+   63 00000000                 EXPORT           _tx_thread_system_return
+   64 00000000         _tx_thread_system_return
+   65 00000000         
+   66 00000000         
+   67 00000000         
+   68 00000000         
+   69 00000000 F04F 5080       MOV              r0, #0x10000000
+   70 00000004 F04F 21E0       MOV              r1, #0xE000E000
+   71 00000008 F8C1 0D04       STR              r0, [r1, #0xD04]
+   72 0000000C F3EF 8005       MRS              r0, IPSR
+   73 00000010 2800            CMP              r0, #0
+   74 00000012 D104            BNE              _isr_context
+   75 00000014         #line   81               "THREADX\\ports\\cortex_m4\\ac5
+\\src\\tx_thread_system_return.s"
+   81 00000014 F3EF 8110       MRS              r1, PRIMASK
+   82 00000018 B662            CPSIE            i
+   83 0000001A F381 8810       MSR              PRIMASK, r1
+   84 0000001E         
+   85 0000001E         _isr_context
+   86 0000001E 4770            BX               lr
+   87 00000020         
+   88 00000020                 END
+Command Line: --debug --xref --cpreproc --diag_suppress=9931 --cpu=Cortex-M4.fp
+.sp --apcs=interwork --depend=.\objects\tx_thread_system_return.d -o.\objects\t
+x_thread_system_return.o -I.\THREADX\common\inc -I.\THREADX\ports\cortex_m4\ac5
+\inc -I.\SYSTEM -I.\USER -ID:\Keilv5\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CM
+SIS\Device\ST\STM32F4xx\Include -ID:\Keilv5\Packs\Keil\STM32F4xx_DFP\2.15.0\Dev
+ice\Include --predefine="__UVISION_VERSION SETA 543" --predefine="STM32F407xx S
+ETA 1" --list=.\listings\tx_thread_system_return.lst THREADX\ports\cortex_m4\ac
+5\src\tx_thread_system_return.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+_isr_context 0000001E
+
+Symbol: _isr_context
+   Definitions
+      At line 85 in file THREADX\\ports\\cortex_m4\\ac5\\src\\tx_thread_system_
+return.s
+   Uses
+      At line 74 in file THREADX\\ports\\cortex_m4\\ac5\\src\\tx_thread_system_
+return.s
+Comment: _isr_context used once
+_tx_thread_system_return 00000000
+
+Symbol: _tx_thread_system_return
+   Definitions
+      At line 64 in file THREADX\\ports\\cortex_m4\\ac5\\src\\tx_thread_system_
+return.s
+   Uses
+      At line 63 in file THREADX\\ports\\cortex_m4\\ac5\\src\\tx_thread_system_
+return.s
+Comment: _tx_thread_system_return used once
+|.text| 00000000
+
+Symbol: |.text|
+   Definitions
+      At line 27 in file THREADX\\ports\\cortex_m4\\ac5\\src\\tx_thread_system_
+return.s
+   Uses
+      None
+Comment: |.text| unused
+3 symbols
+336 symbols in table
