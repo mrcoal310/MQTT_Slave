@@ -66,19 +66,19 @@ ESP8266 串口参数为 `115200 8N1`，中断入口在 `USER/stm32f4xx_it.c` 的
 | `mqtt_thread` | 3 | 8192 B | Wi-Fi 配网、MQTT 连接、收发 JSON、重试和定时逻辑 |
 | `key_thread` | 4 | 1024 B | 扫描 KEY0/KEY1/KEY2/WKUP 并产生请求 |
 
-SysTick 由 ThreadX 接管，`SysTick_Handler()` 调用 `_tx_timer_interrupt()`。
+SysTick 由 ThreadX 接管，`SysTick_Handler()` 调用 `_tx_timer_interrupt()`
 
 ## 配网流程
 
-1. 上电后 `Wifi_Init()` 会从 Flash `0x080E0000` 读取已保存的 Wi-Fi 配置。
+1. 上电后 `Wifi_Init()` 会从 Flash `0x080E0000` 读取已保存的 Wi-Fi 配置
 2. 如果没有有效配置，设备进入 AP 配网模式：
    - AP 名称：`Sen_xxxx`，无法读取 MAC 后缀时为 `Sen_0000`
    - AP 密码：`12345678`
    - 端口：HTTP `80`
-3. 手机或电脑连接该 AP，通常访问 `http://192.168.4.1`。
-4. 在网页中填写路由器 Wi-Fi 名称和密码，提交后写入 Flash。
-5. 保存成功后设备触发软件重启，之后以 STA 模式连接路由器并连接 MQTT。
-6. 如需重新配网，长按 `KEY2` 约 3 秒清除 Flash 中的 Wi-Fi 配置。
+3. 手机或电脑连接该 AP，通常访问 `http://192.168.4.1`
+4. 在网页中填写路由器 Wi-Fi 名称和密码，提交后写入 Flash
+5. 保存成功后设备触发软件重启，之后以 STA 模式连接路由器并连接 MQTT
+6. 如需重新配网，长按 `KEY2` 约 3 秒清除 Flash 中的 Wi-Fi 配置
 
 ## MQTT 配置
 
@@ -92,7 +92,7 @@ MQTT 连接参数在 `HARDWARE/wifi.c` 中定义：
 | Port | `1883` |
 | ClientId / Username / Password | 固化在 `wifi.c` 中 |
 
-如需更换设备或产品，应同步修改 `WIFI_PRODUCT_KEY`、`WIFI_DEVICE_NAME`、`clientId`、`username`、`passwd` 和 MQTT Host。
+如需更换设备或产品，应同步修改 `WIFI_PRODUCT_KEY`、`WIFI_DEVICE_NAME`、`clientId`、`username`、`passwd` 和 MQTT Host
 
 ### 主题
 
@@ -234,12 +234,12 @@ WiFi:OK/ING/FAIL/AP
 MQTT:OK/ING/FAIL 或 SSID:Sen_xxxx 或 DATA:ON
 ```
 
-当设备处于配网模式时，第 4 行显示 AP 名称；开始周期上报后，第 4 行显示 `DATA:ON`。
+当设备处于配网模式时，第 4 行显示 AP 名称；开始周期上报后，第 4 行显示 `DATA:ON`
 
 ## 编译与烧录
 
-1. 使用 Keil uVision 打开 `project.uvprojx`。
-2. 确认目标芯片为 `STM32F407ZG`。
+1. 使用 Keil uVision 打开 `project.uvprojx`
+2. 确认目标芯片为 `STM32F407ZG`
 3. 确认 Include Path 包含：
    - `.\CORE`
    - `.\FWLIB\inc`
@@ -248,8 +248,8 @@ MQTT:OK/ING/FAIL 或 SSID:Sen_xxxx 或 DATA:ON
    - `.\SYSTEM`
    - `.\THREADX\common\inc`
    - `.\THREADX\ports\cortex_m4\ac5\inc`
-4. 编译工程，输出文件位于 `Objects/`，HEX 文件为 `Objects/project.hex`。
-5. 使用 ST-LINK/J-LINK 下载到开发板。
+4. 编译工程，输出文件位于 `Objects/`，HEX 文件为 `Objects/project.hex`
+5. 使用 ST-LINK/J-LINK 下载到开发板
 
 ## 调试建议
 
@@ -258,11 +258,11 @@ MQTT:OK/ING/FAIL 或 SSID:Sen_xxxx 或 DATA:ON
 - OLED 显示 `WiFi:JOIN FAIL` 时，优先检查路由器 SSID/密码、2.4 GHz 网络和 ESP8266 信号
 - OLED 显示 `MQTT:CONN FAIL` 时，检查阿里云设备三元组、密码签名、Broker 地址和网络是否可达
 - 温湿度一直为 `--` 时，检查 DHT11 的 `PA7` 接线、上拉和供电
-- 如设备循环进入旧网络，可长按 `KEY2` 清除保存的 Wi-Fi 配置后重新配网。
+- 如设备循环进入旧网络，可长按 `KEY2` 清除保存的 Wi-Fi 配置后重新配网
 
 ## 后续扩展
 
-- 在 `wifi_load_set()` 中加入继电器、风扇或执行器 GPIO 控制。
-- 将 MQTT 三元组移出源码，改为通过配网页面或 Flash 参数区配置。
-- 为配网页面增加设备信息、信号强度和保存结果倒计时。
-- 增加传感器异常事件上报和本地蜂鸣器/LED 告警。
+- 在 `wifi_load_set()` 中加入继电器、风扇或执行器 GPIO 控制
+- 将 MQTT 三元组移出源码，改为通过配网页面或 Flash 参数区配置
+- 为配网页面增加设备信息、信号强度和保存结果倒计时
+- 增加传感器异常事件上报和本地蜂鸣器/LED 告警
